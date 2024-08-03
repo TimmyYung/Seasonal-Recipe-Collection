@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import RecipeCard from './RecipeCard';
 import getCurrentSeason from './utils/getCurrentSeason';
 
@@ -15,7 +15,8 @@ const sampleRecipes = [
     name: "Summer Berry Smoothie",
     description: "A cool smoothie made with fresh summer berries.",
     ingredients: ["Strawberries", "Blueberries", "Raspberries", "Yogurt", "Honey"],
-    locations: ["summer"]
+    locations: ["summer"],
+    image: ["https://cookingformysoul.com/wp-content/uploads/2022/05/triple-berry-smoothie-feat-min-500x375.jpg", "smooth"]
   },
   {
     name: "Autumn Pumpkin Soup",
@@ -31,42 +32,34 @@ const sampleRecipes = [
   }
 ];
 
-function Recipes({ location }) {
+function Recipes() {
   const [recipes, setRecipes] = useState([]);
+  const [season, setSeason] = useState('');
 
   useEffect(() => {
-    if (location) {
-      const currentSeason = getCurrentSeason(); // Function to get the current season
-      // Filter recipes based on the current season
-      const filteredRecipes = sampleRecipes.filter(recipe => 
-        recipe.locations.includes(currentSeason)
-      );
-      setRecipes(filteredRecipes); // Update state with the filtered recipes
-    }
-  }, [location]); // Re-run effect when location changes
+    const currentSeason = getCurrentSeason(); // Function to get the current season
+    setSeason(currentSeason);
+    // Filter recipes based on the current season
+    const filteredRecipes = sampleRecipes.filter(recipe => 
+      recipe.locations.includes(currentSeason)
+    );
+    setRecipes(filteredRecipes); // Update state with the filtered recipes
+  }, []); // Run effect only once on component mount
 
   return (
     <div className="recipes p-4">
-      {location ? (
-        recipes.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {recipes.map((recipe, index) => (
-              <RecipeCard key={index} recipe={recipe} /> // Render each recipe card
-            ))}
-          </div>
-        ) : (
-          <p>No seasonal dishes found for {location}.</p>
-        )
+      <h2 className="text-3xl font-bold text-center mb-6">Seasonal Recipes for {season.charAt(0).toUpperCase() + season.slice(1)}</h2>
+      {recipes.length > 0 ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {recipes.map((recipe, index) => (
+            <RecipeCard key={index} recipe={recipe} /> // Render each recipe card
+          ))}
+        </div>
       ) : (
-        <p>Please enter your location to see seasonal dishes.</p>
+        <p>No seasonal dishes found.</p>
       )}
     </div>
   );
 }
-
-// Define the prop types for the Recipes component
-Recipes.propTypes = {
-  location: PropTypes.string.isRequired,
-};
 
 export default Recipes;

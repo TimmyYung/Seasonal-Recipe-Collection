@@ -2,7 +2,6 @@ import { useState } from 'react';
 import Search from './Search';
 import Recipes from './Recipes';
 import Result from './Result';
-import './App.css';
 
 function App() {
   const [location, setText] = useState('');
@@ -18,4 +17,3 @@ function App() {
 }
 
 export default App;
-;
