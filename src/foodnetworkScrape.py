@@ -4,11 +4,9 @@
 # In[24]:
 
 
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup
 import pandas as pd
+import requests
 
 def scrape_recipe(url):
     if not url.startswith("https://www.foodnetwork.ca/"):
@@ -16,25 +14,20 @@ def scrape_recipe(url):
         return None
               
     print(f"Scraping Recipe: {url}")
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-    driver.get(url)
-    html_content = driver.page_source
-    driver.quit()
+    response = requests.get(url)
     
-    soup = BeautifulSoup(html_content,'lxml')
+    soup = BeautifulSoup(response.text, 'html.parser')
     
     title_tag = soup.find('h1', class_='article-title')
     title = title_tag.text.strip() if title_tag else 'Title not found'
     print(title)
     
     ingredients_div =  soup.find_all('div', class_='subrecipe-ingredients')
-    #print(ingredients_div)
     if not ingredients_div:
         print("No Ingredients div found")
         return [],[],[]
     
     ingredients = []
-        #print(ingredient)
     for div in ingredients_div:
         for ingredient in div.find_all('div'):
             ingredients.append(ingredient.get_text (strip=True))
@@ -64,18 +57,21 @@ def process_recipe_link(link):
                             
         return title_list, ingredients_list, instructions_list
     else:
-        return [],[],[],[]
+        return [],[],[]
                             
-link = 'https://www.foodnetwork.ca/recipe/cheese-manakish-middle-eastern-flatbread/'
+# link = 'https://www.foodnetwork.ca/recipe/cheese-manakish-middle-eastern-flatbread/'
+
+link=""
 title_list, ingredients_list, instructions_list = process_recipe_link(link)
-                            
+
+# Create a list to store grouped ingredients
+grouped_ingredients = []
+
+# Pair every two elements in the ingredients list
+for i in range(0, len(ingredients_list), 2):
+    pair = ingredients_list[i:i + 2]
+    grouped_ingredients.append(pair)
+
 print("Title List:", title_list)
-print("Ingredients List:", ingredients_list)
+print("Ingredients List:", grouped_ingredients)
 print("Instructions List:", instructions_list)
-
-
-# In[ ]:
-
-
-
-

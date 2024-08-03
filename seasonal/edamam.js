@@ -33,6 +33,7 @@ export function getRecipes() {
                 const label = recipe.recipe.label;
                 const image = recipe.recipe.image;
                 const uri = recipe.recipe.url;
+                const listIngredients = recipe.recipe.ingredients // ARRAY OF INGREDIENTS
                 recipedetails += `
                 <div style="width: 5rem;">
                     <img src="${image}" alt="image">
@@ -41,6 +42,7 @@ export function getRecipes() {
                         <button class="view-recipe" data-uri="${uri}">View Recipe</button>
                     </div>
                 </div>`;
+                // console.log(recipe.recipe.ingredients)
             });
             results.innerHTML = recipedetails;
         })
