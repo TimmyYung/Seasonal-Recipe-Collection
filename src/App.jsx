@@ -4,16 +4,15 @@ import Recipes from './Recipes';
 import ObjectDetect from './ObjectDetect';
 import Timmy from './Timmy';
 
-
 function App() {
-  const [allRecipes, setAllRecipes] = useState('')
-  console.log(allRecipes)
+  const [allRecipes, setAllRecipes] = useState([]);
+
   return (
     <div className="App">
-      <Header setRecipes={setAllRecipes}/>
+      <Header setRecipes={setAllRecipes} />
       <Recipes recipes={allRecipes} />
       <ObjectDetect />
-      <Timmy/>
+      <Timmy />
     </div>
   );
 }
