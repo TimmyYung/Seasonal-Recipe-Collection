@@ -1,25 +1,63 @@
 import React, { useState } from 'react';
 
-export const Timmy = () => {
-    const [output, setOutput] = useState('');
+function App() {
+  const [link, setLink] = useState('');
+  const [result, setResult] = useState(null);
+  const [error, setError] = useState('');
 
-    const handleClick = async () => {
-      try {
-        const response = await fetch('http://localhost:5000/run-script');
-        const data = await response.json();
-        setOutput(data.message);
-      } catch (error) {
-        console.error('Error:', error);
-        setOutput('Failed to run the script');
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const response = await fetch('http://localhost:5000/process', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ link }),
+      });
+
+      const data = await response.json();
+      
+      if (response.ok) {
+        setResult(data);
+        setError('');
+      } else {
+        setError(data.error || 'Something went wrong');
+        setResult(null);
       }
-    };
+    } catch (error) {
+      console.error('Error:', error);
+      setError('Failed to fetch data');
+      setResult(null);
+    }
+  };
 
-    return(
+  return (
+    <div>
+      <h1>Process Recipe Link</h1>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="link">Recipe Link:</label>
+        <input
+          type="text"
+          id="link"
+          value={link}
+          onChange={(e) => setLink(e.target.value)}
+          required
+        />
+        <button type="submit">Submit</button>
+      </form>
+      {error && <p style={{ color: 'red' }}>Error: {error}</p>}
+      {result && (
         <div>
-            <h1>Run Python Script from React</h1>
-            <button onClick={handleClick}>Run Script</button>
-            <p>Output: {output}</p>
+          <h2>Recipe Details</h2>
+          <p><strong>Title:</strong> {result.title.join(', ')}</p>
+          <p><strong>Ingredients:</strong> {result.ingredients.join(', ')}</p>
+          <p><strong>Instructions:</strong> {result.instructions.join(', ')}</p>
         </div>
-    )
+      )}
+    </div>
+  );
 }
-export default Timmy;
+
+export default App;
