@@ -68,9 +68,9 @@ const input = JSON.parse(fs.readFileSync('data.json', 'utf8'));
 
     await Promise.all(promises);
 
-    console.log('Saving data to output.json...');
-    fs.writeFileSync('output.json', JSON.stringify(results, null, 4), 'utf8');
-    console.log('Data has been saved to output.json');
+    console.log('Saving data to US_Seasonal.json...');
+    fs.writeFileSync('US_Seasonal.json', JSON.stringify(results, null, 4), 'utf8');
+    console.log('Data has been saved to US_Seasonal.json');
 
     console.log('Closing the browser...');
     await browser.close();
