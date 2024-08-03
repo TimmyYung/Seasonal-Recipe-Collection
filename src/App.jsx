@@ -1,4 +1,4 @@
-import { ObjectDetect } from "./ObjectDetect";
+import ObjectDetect from "./ObjectDetect";
 
 function App() {
   return (

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import "@tensorflow/tfjs";
 import * as cocoSsd from "@tensorflow-models/coco-ssd";
 import Webcam from "react-webcam";
@@ -6,6 +6,7 @@ import Webcam from "react-webcam";
 const ObjectDetect = () => {
   const canvasRef = useRef(null);
   const webcamRef = useRef(null);
+
 
   const runCoco = async () => {
     const net = await cocoSsd.load();
@@ -19,6 +20,7 @@ const ObjectDetect = () => {
     obj.forEach((prediction) => {
       const [x, y, width, height] = prediction.bbox;
       const text = prediction.class;
+      console.log(prediction.class);
 
       // Draw bounding box
       ctx.beginPath();
@@ -55,9 +57,6 @@ const ObjectDetect = () => {
     }
   };
 
-  useEffect(() => {
-    runCoco();
-  }, []);
 
   return (
     <div>
@@ -65,12 +64,12 @@ const ObjectDetect = () => {
         ref={webcamRef}
         muted={true}
         width="720"
-        height="600"
-      ></Webcam>
+        height="600" />
       <canvas
         ref={canvasRef}
-        style={{ position: "absolute", top: 80, left: 400 }}
-      ></canvas>
+        className="absolute top-0 left-0"
+      />
+      <button onClick={runCoco}>Start Object Detection</button>
     </div>
   );
 };
