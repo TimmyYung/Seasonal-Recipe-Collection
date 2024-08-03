@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Search from './Search';
 import Recipes from './Recipes';
 import Result from './Result';
-import './App.css';
+import Timmy from './Timmy';
 
 function App() {
   const [location, setText] = useState('');
@@ -12,6 +12,10 @@ function App() {
       <Search setText={setText} />
       <Result location={location} />
       <Recipes location={location} />
+      
+      <Timmy/>
+
+      
 
     </div>
   );
