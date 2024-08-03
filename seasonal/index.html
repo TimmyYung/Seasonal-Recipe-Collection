@@ -15,7 +15,7 @@
         <option>Select a fruit</option>
     </select>
 
-    <button id="findNearestState">Find Nearest State and give ingridients plz</button>
+    <br>
     
     <div class="results" id="results">
         
@@ -24,18 +24,20 @@
 
 
     <h1>Recipe Search</h1>
-    <h3>Enter your ingredient</h3>
-    <div class="container-fluid">
-        <input type="text" placeholder="Ingredient" id="ingredient">
-    </div>
+    <!-- <h3>Enter your ingredient</h3>
     <div>
-        <button type="button" onclick="getRecipes()">Submit</button>
+        <input type="text" placeholder="Ingredient" id="ingredient">
+    </div> -->
+    <button id="findNearestState">Step 1</button>
+    <div class="results" id="results"></div>
+    <div>
+        <button id="submitButton" type="button" onclick="getRecipes()">Step 2</button>
     </div>
 
     <div id="results">
     </div>
 
 </body>
-<script src="edamam.js"></script>
-<script src="script.js"></script>
+<script type="module" src="edamam.js"></script>
+<script type="module" src="script.js"></script>
 </html>

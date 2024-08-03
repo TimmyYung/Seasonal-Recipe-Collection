@@ -1,4 +1,7 @@
+export let availableFruits = [];
+import { getRecipes } from './edamam.js'
 document.addEventListener('DOMContentLoaded', () => {
+    
     const stateSelect = document.getElementById('stateSelect');
     const fruitSelect = document.getElementById('fruitSelect');
     const resultsDiv = document.getElementById('results');
@@ -162,8 +165,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (nearestState) {
                 const currentMonth = new Date().toLocaleString('default', { month: 'long' });
                 const fruits = jsonData[nearestState] || {};
-                const availableFruits = Object.keys(fruits).filter(fruit => fruits[fruit].includes(currentMonth));
-
+                availableFruits = Object.keys(fruits).filter(fruit => fruits[fruit].includes(currentMonth));
+                
                 if (availableFruits.length > 0) {
                     displayFruits(nearestState, availableFruits);
                 } else {
@@ -200,5 +203,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function toRadians(degrees) {
         return degrees * (Math.PI / 180);
+    }
+
+    function doEverything() {
+        findNearestState().then(getRecipes())
     }
 });
