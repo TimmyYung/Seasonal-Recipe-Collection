@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <select id="stateSelect">
+        <option>Select a State</option>
+
+    </select>
+
+    <select id="fruitSelect">
+        <option>Select a fruit</option>
+    </select>
+
+    <br>
+    
+    <div class="results" id="results">
+        
+    </div>
+
+
+
+    <h1>Recipe Search</h1>
+    <!-- <h3>Enter your ingredient</h3>
+    <div>
+        <input type="text" placeholder="Ingredient" id="ingredient">
+    </div> -->
+    <button id="findNearestState">Step 1</button>
+    <div class="results" id="results"></div>
+    <div>
+        <button id="submitButton" type="button" onclick="getRecipes()">Step 2</button>
+    </div>
+
+    <div id="results">
+    </div>
+
+</body>
+<script type="module" src="edamam.js"></script>
+<script type="module" src="script.js"></script>
+</html>
