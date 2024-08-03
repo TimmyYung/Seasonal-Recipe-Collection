@@ -8,11 +8,16 @@ export const getRecipes = (ingredients) => {
 
     fetch(url).then((response) => {
         if (response.status === 200) {
-            console.log(response.json)
+            return response.json();
         } else {
             throw new Error(`Request failed with status code ${response.status}`);
         }
-    }).then((data) => data.hits.forEach((recipe) => {
-        console.log(recipe)
-    }))
+    })
+    .then((data) => {
+        data.hits.forEach((recipe) => 
+            {
+                console.log(recipe.recipe)
+            }
+        )
+    })
 };
