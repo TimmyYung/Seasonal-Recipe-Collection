@@ -1,7 +1,7 @@
 import { availableFruits } from './script.js';
 
 export function getRecipes() {
-    // Choose a fruit from availableFruits
+    // Choose 2 fruits from availableFruits
     const shuffled = availableFruits.sort(() => 0.5 - Math.random());
     let ingredient = shuffled.slice(0, 2);
     console.log(ingredient)
