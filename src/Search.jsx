@@ -1,6 +1,6 @@
 function Search() {
   return (
-    <header className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white p-8 rounded-lg shadow-xl">
+    <header className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white p-8 rounded-lg shadow-xl mb-6">
       <h1 className="text-4xl font-extrabold mb-6 text-center tracking-wide">
         🌟 Recipe Finder 🌟
       </h1>

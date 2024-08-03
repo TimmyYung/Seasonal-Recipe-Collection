@@ -1,22 +1,23 @@
 import { useEffect, useState } from 'react';
+
 // import PropTypes from 'prop-types';
 import RecipeCard from './components/RecipeCard';
 import getCurrentSeason from './utils/getCurrentSeason';
 import { sampleRecipes } from './components/recipes';
+
 
 function Recipes() {
   const [recipes, setRecipes] = useState([]);
   const [season, setSeason] = useState('');
 
   useEffect(() => {
-    const currentSeason = getCurrentSeason(); // Function to get the current season
+    const currentSeason = getCurrentSeason(); 
     setSeason(currentSeason);
-    // Filter recipes based on the current season
     const filteredRecipes = sampleRecipes.filter(recipe => 
       recipe.locations.includes(currentSeason)
     );
-    setRecipes(filteredRecipes); // Update state with the filtered recipes
-  }, []); // Run effect only once on component mount
+    setRecipes(filteredRecipes);
+  }, []);
 
   return (
     <div className="recipes p-4">
@@ -24,7 +25,7 @@ function Recipes() {
       {recipes.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5   gap-4">
           {recipes.map((recipe, index) => (
-            <RecipeCard key={index} recipe={recipe} /> // Render each recipe card
+            <RecipeCard key={index} recipe={recipe} />
           ))}
         </div>
       ) : (

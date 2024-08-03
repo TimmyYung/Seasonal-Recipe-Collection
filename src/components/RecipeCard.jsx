@@ -17,6 +17,7 @@ function RecipeCard({ recipe }) {
               <li key={index} className="text-gray-700">{ingredient}</li>
             ))}
           </ul>
+
         </div>
       </div>
       <div className="p-6">
