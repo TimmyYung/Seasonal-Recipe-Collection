@@ -1,24 +1,60 @@
 import { stateCoordinates } from "./constants/states";
 
-function Search() {
+const stateFruits = await fetch("/seasonal/US_Seasonal.json").then((data) =>
+  data.json()
+);
 
-  return (
-    <header className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white p-8 rounded-lg shadow-xl mb-6">
-      <h1 className="text-4xl font-extrabold mb-6 text-center tracking-wide">
-        🌟 Recipe Finder 🌟
-      </h1>
-      <div className="flex justify-center space-x-4">
-        <button id="findNearestState" className="bg-gradient-to-r from-blue-400 to-indigo-500 text-white py-3 px-8 rounded-full shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-blue-300 transition-all duration-300 transform hover:-translate-y-1 hover:scale-105">
-          Step 1
-        </button>
-        <button className="bg-gradient-to-r from-blue-400 to-indigo-500 text-white py-3 px-8 rounded-full shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-blue-300 transition-all duration-300 transform hover:-translate-y-1 hover:scale-105">
-          Step 2
-        </button>
-        <div id="results"></div>
-      </div>
-      <script type="module" src="seasonal\script.js"></script>
-    </header>
-  );
+function getDistance(lat1, lon1, lat2, lon2) {
+  const R = 6371; // Radius of the Earth in km
+  const dLat = toRadians(lat2 - lat1);
+  const dLon = toRadians(lon2 - lon1);
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(toRadians(lat1)) *
+      Math.cos(toRadians(lat2)) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c; // Distance in km
 }
 
-export default Search;
+function toRadians(degrees) {
+  return degrees * (Math.PI / 180);
+}
+
+export const findNearestState = () => {
+  if (!navigator.geolocation) {
+    return {title: "Error",subheading: "Geolocation is not supported by this browser.", context: null};
+  }
+  navigator.geolocation.getCurrentPosition((position) => {
+    const userLat = position.coords.latitude;
+    const userLon = position.coords.longitude;
+    // Find the nearest state
+    let nearestState = "";
+    let minDistance = Infinity;
+
+    stateCoordinates.forEach((state) => {
+      const { name, lat, lon } = state;
+      const distance = getDistance(userLat, userLon, lat, lon);
+      if (distance < minDistance) {
+        minDistance = distance;
+        nearestState = name;
+      }
+    });
+    if (nearestState) {
+      const currentMonth = new Date().toLocaleString("default", {
+        month: "long",
+      });
+      const fruits = stateFruits[nearestState] || {};
+      const availableFruits = Object.keys(fruits).filter((fruit) =>
+        fruits[fruit].includes(currentMonth)
+      );
+      if (availableFruits.length > 0) {
+        console.log({title: nearestState, subheading: "Fruits in Season", context: availableFruits.join(', ')})
+        return {title: nearestState, subheading: "Fruits in Season", context: availableFruits.join(', ')};
+      } else {
+        return {title: nearestState, subheading: "Fruits in Season", context: "No fruits are in season during this month."};
+      }
+    }
+  });
+};
