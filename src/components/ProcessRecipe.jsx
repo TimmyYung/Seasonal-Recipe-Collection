@@ -3,7 +3,7 @@ import { useState } from 'react';
 export const fixedLink = 'https://www.foodnetwork.ca/recipe/cheese-manakish-middle-eastern-flatbread/';
 
 
-function App() {
+function FormatRecipe() {
   const [result, setResult] = useState(null);
   const [error, setError] = useState('');
 
@@ -59,4 +59,4 @@ function App() {
   );
 }
 
-export default App;
+export default FormatRecipe;

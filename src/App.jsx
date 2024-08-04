@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Header from './components/Header';
 import Recipes from './components/Recipes';
 import ObjectDetect from './components/ObjectDetect';
-import Timmy from './components/FormatRecipt';
+import ProcessRecipe from './components/ProcessRecipe';
 
 function App() {
   const [allRecipes, setAllRecipes] = useState([]);
@@ -16,7 +16,7 @@ function App() {
       <ObjectDetect />
       <br></br>
       <br></br>
-      <Timmy />
+      <ProcessRecipe />
     </div>
   );
 }
