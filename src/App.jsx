@@ -11,8 +11,8 @@ function App() {
     <div className="App">
       <Header setRecipes={setAllRecipes} />
       <Recipes recipes={allRecipes} />
-      <ObjectDetect />
-      <Timmy />
+      {/* <ObjectDetect />
+      <Timmy /> */}
     </div>
   );
 }
