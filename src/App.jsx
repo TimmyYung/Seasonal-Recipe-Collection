@@ -12,7 +12,7 @@ function App() {
       <Header setRecipes={setAllRecipes} />
       <Recipes recipes={allRecipes} />
       {/* <ObjectDetect />*/}
-      <Timmy />
+      {/* <Timmy /> */}
     </div>
   );
 }
