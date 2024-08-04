@@ -1,7 +1,10 @@
 # Terrahacks 2024 Submission
 Authors: Joanne Wijetunga, Timothy Yung, Pritumi Patel, Kyle Truong
 <br>
-<center><img src="images/logo.jpg" width="350px"></center>
+
+<p align="center">
+  <img src="images/logo.png" width="350px" alt="logo"/>
+</p>
 
 ## Instructions
 1. Create a Python virtual environment using `python -m venv /path/to/new/virtual/environment`
