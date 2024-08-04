@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[24]:
-
-
 from bs4 import BeautifulSoup
 import pandas as pd
 import requests
@@ -11,7 +5,7 @@ import requests
 def scrape_recipe(url):
     if not url.startswith("https://www.foodnetwork.ca/"):
         print(f"Skipping non-Food Network link: {url}")
-        return None
+        return url
               
     print(f"Scraping Recipe: {url}")
     response = requests.get(url)
