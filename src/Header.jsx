@@ -1,17 +1,21 @@
 import { findNearestState } from "./GetFruits";
 import { useState } from 'react';
 import { getRecipes } from "./GetRecipes";
+import PropTypes from 'prop-types';
 
-const Header = () => {
+const Header = ({ setRecipes }) => {
+Header.propTypes = {
+  setRecipes: PropTypes.func.isRequired,
+};
   const [result, setResult] = useState(null);
-
   const recipeSearch = async () => {
     try {
       const data = await findNearestState();
       console.log(data)
       if (data && data.context) {
         setResult(data.context);
-        getRecipes(data.context);
+        const recipes = await getRecipes(data.context);
+        setRecipes(recipes)
       }
     } catch (error) {
       console.error("Error finding nearest state or retrieving fruits:", error);

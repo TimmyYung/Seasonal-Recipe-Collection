@@ -6,12 +6,12 @@ import Timmy from './Timmy';
 
 
 function App() {
-  const [location, setText] = useState('');
-
+  const [allRecipes, setAllRecipes] = useState('')
+  console.log(allRecipes)
   return (
     <div className="App">
-      <Header setText={setText} />
-      <Recipes location={location} />
+      <Header setRecipes={setAllRecipes}/>
+      <Recipes recipes={allRecipes} />
       <ObjectDetect />
       <Timmy/>
     </div>
