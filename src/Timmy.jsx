@@ -14,7 +14,7 @@ function App() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ link: toGo }),
+        body: JSON.stringify({ link: fixedLink }),
       });
 
       const contentType = response.headers.get('content-type');
