@@ -19,7 +19,8 @@ function App() {
       const contentType = response.headers.get('content-type');
 
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        const errorText = await response.text();
+        throw new Error(`Network response was not ok: ${errorText}`);
       }
 
       if (contentType && contentType.includes('application/json')) {
@@ -31,7 +32,8 @@ function App() {
           throw new Error('Unexpected JSON format');
         }
       } else {
-        throw new Error('Response is not JSON');
+        const text = await response.text();
+        throw new Error(`Response is not JSON: ${text}`);
       }
     } catch (error) {
       console.error('Error:', error);
