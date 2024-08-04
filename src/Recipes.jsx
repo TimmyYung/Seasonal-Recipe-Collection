@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import RecipeCard from './components/RecipeCard';
 
@@ -7,7 +6,7 @@ function Recipes({ recipes }) {
   return (
     <div >
       {recipes.length > 0 ? (
-        <ul className='grid grid-cols-4'>
+        <ul className='grid grid-cols-4 max-md:grid-cols-2 max-lg:grid-cols-3 xl:grid-cols-5'>
           {recipes.map((recipe, key) => (
             <RecipeCard
               key={key}
@@ -19,7 +18,7 @@ function Recipes({ recipes }) {
           ))}
         </ul>
       ) : (
-        <p>No recipes available.</p>
+        <h1 className='italic px-8 text-xl'>No recipes available.</h1>
       )}
     </div>
   );
