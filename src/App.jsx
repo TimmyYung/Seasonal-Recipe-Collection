@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import Header from './components/Header';
-import Recipes from './components/Recipes';
-import ObjectDetect from './components/ObjectDetect';
-import ProcessRecipe from './components/ProcessRecipe';
+import Header from './Header';
+import Recipes from './Recipes';
+import ObjectDetect from './ObjectDetect';
+import Timmy from './Timmy';
 
 function App() {
   const [allRecipes, setAllRecipes] = useState([]);
@@ -11,12 +11,8 @@ function App() {
     <div className="App">
       <Header setRecipes={setAllRecipes} />
       <Recipes recipes={allRecipes} />
-      <br></br>
-      <br></br>
-      <ObjectDetect />
-      <br></br>
-      <br></br>
-      <ProcessRecipe />
+      {/* <ObjectDetect /> */}
+      <Timmy />
     </div>
   );
 }

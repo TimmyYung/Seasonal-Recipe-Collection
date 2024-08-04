@@ -4,16 +4,18 @@ import * as cocoSsd from "@tensorflow-models/coco-ssd";
 
 const ObjectDetect = () => {
   const [selectImage, setSelectImage] = useState(null);
-  const [detectedObjects, setDetectedObjects] = useState([]);
   const imageRef = useRef();
+  const inPicture = [];
 
   const runCoco = async () => {
     if (imageRef.current && selectImage) {
       const model = await cocoSsd.load();
       const results = await model.detect(imageRef.current);
-      const objectsInPicture = results
-        .map(object => object.class);
-      setDetectedObjects(objectsInPicture);
+      results.forEach((object) => {
+        if (object.score > 0.6)
+        inPicture.push(object.class)}
+      );
+      console.log(inPicture);
     }
   };
 
@@ -23,7 +25,6 @@ const ObjectDetect = () => {
 
   const handleFileChange = (e) => {
     setSelectImage(e.target.files[0]);
-    setDetectedObjects([]); // Clear the previous results when a new image is selected
   };
 
   return (
@@ -42,14 +43,6 @@ const ObjectDetect = () => {
           width={"250px"}
           onLoad={handleImageLoad}
         />
-      )}
-      <h1>Objects detected:</h1>
-      {detectedObjects.length > 0 && (
-        <ul>
-          {detectedObjects.map((item, key) => (
-            <li key={key}>{item}</li>
-          ))}
-        </ul>
       )}
     </>
   );

@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    export function findNearestState() {
+    function findNearestState() {
         if (!navigator.geolocation) {
             resultsDiv.innerHTML = '<p>Geolocation is not supported by this browser.</p>';
             return;

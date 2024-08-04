@@ -24,4 +24,3 @@ backend/__pycache__
 *.sln
 *.sw?
 .venv
-.env

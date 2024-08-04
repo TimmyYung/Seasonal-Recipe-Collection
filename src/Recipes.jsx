@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import RecipeCard from './RecipeCard';
+import RecipeCard from './components/RecipeCard';
 
 function Recipes({ recipes }) {
   console.log({ recipes });

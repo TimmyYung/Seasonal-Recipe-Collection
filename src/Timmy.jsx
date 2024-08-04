@@ -1,11 +1,10 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
-export const fixedLink = 'https://www.foodnetwork.ca/recipe/cheese-manakish-middle-eastern-flatbread/';
-
-
-function App() {
+export function App(toGo) {
   const [result, setResult] = useState(null);
   const [error, setError] = useState('');
+
+  const fixedLink = 'https://www.foodnetwork.ca/recipe/cheese-manakish-middle-eastern-flatbread/';
 
   const handleClick = async () => {
     try {
@@ -14,13 +13,14 @@ function App() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ link: fixedLink }),
+        body: JSON.stringify({ link: toGo }),
       });
 
       const contentType = response.headers.get('content-type');
 
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        const errorText = await response.text();
+        throw new Error(`Network response was not ok: ${errorText}`);
       }
 
       if (contentType && contentType.includes('application/json')) {
@@ -32,7 +32,8 @@ function App() {
           throw new Error('Unexpected JSON format');
         }
       } else {
-        throw new Error('Response is not JSON');
+        const text = await response.text();
+        throw new Error(`Response is not JSON: ${text}`);
       }
     } catch (error) {
       console.error('Error:', error);
@@ -43,7 +44,8 @@ function App() {
 
   return (
     <div>
-      <button onClick={handleClick}>Process Recipe POC</button>
+      <h1>Process Recipe Link</h1>
+      <button onClick={handleClick}>Process Fixed Recipe Link</button>
       {error && <p style={{ color: 'red' }}>Error: {error}</p>}
       {result && (
         <div>
@@ -57,4 +59,4 @@ function App() {
   );
 }
 
-export default FormatRecipe;
+export default App;
