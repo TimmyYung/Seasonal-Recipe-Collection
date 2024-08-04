@@ -10,7 +10,10 @@ function getDistance(lat1, lon1, lat2, lon2) {
   const dLon = toRadians(lon2 - lon1);
   const a =
     Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    Math.cos(toRadians(lat1)) *
+      Math.cos(toRadians(lat2)) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   return R * c; // Distance in km
 }
@@ -22,7 +25,7 @@ function toRadians(degrees) {
 export const findNearestState = () => {
   return new Promise((resolve, reject) => {
     if (!navigator.geolocation) {
-      reject({title: "Error", subheading: "Geolocation is not supported by this browser.", context: null});
+      reject({title: "Error", subheading: "Geolocation is not supported by this browser.", context: []});
       return;
     }
 
@@ -55,10 +58,10 @@ export const findNearestState = () => {
           resolve({title: nearestState, subheading: "Fruits in Season", context: ["No fruits are in season during this month."]});
         }
       } else {
-        resolve({title: "Error", subheading: "Unable to determine the nearest state.", context: null});
+        resolve({title: "Error", subheading: "Unable to determine the nearest state.", context: []});
       }
     }, error => {
-      reject({title: "Geolocation error", subheading: error.message, context: null});
+      reject({title: "Geolocation error", subheading: error.message, context: []});
     });
   });
 };

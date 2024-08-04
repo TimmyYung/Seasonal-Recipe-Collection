@@ -1,5 +1,6 @@
 import { findNearestState } from "./GetFruits";
 import { useState } from 'react';
+import { getRecipes } from "./GetRecipes";
 
 const Header = () => {
   const [result, setResult] = useState(null);
@@ -7,8 +8,11 @@ const Header = () => {
   const recipeSearch = async () => {
     try {
       const data = await findNearestState();
-      setResult(data.context);
-      console.log(data);
+      console.log(data)
+      if (data && data.context) {
+        setResult(data.context);
+        getRecipes(data.context);
+      }
     } catch (error) {
       console.error("Error finding nearest state or retrieving fruits:", error);
     }
@@ -23,7 +27,6 @@ const Header = () => {
         <button onClick={recipeSearch} className="bg-gradient-to-r from-blue-400 to-indigo-500 text-white py-3 px-8 rounded-full shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-blue-300 transition-all duration-300 transform hover:-translate-y-1 hover:scale-105">
           Search for Local Recipes
         </button>
-      
       </div>
       <div>
         {result && result.length > 0 ? (
@@ -31,9 +34,9 @@ const Header = () => {
             <h2 className="font-bold">Fruits in Season:</h2>
             {result.join(', ')}
           </div>
-        ) : result ? (
+        ) : (
           <p>No fruits in season found.</p>
-        ) : <p></p>}
+        )}
       </div>
     </header>
   );
