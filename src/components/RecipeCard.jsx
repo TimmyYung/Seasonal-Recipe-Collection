@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 
 function RecipeCard({ label, image, url, ingredients }) {
-  
   return (
     <div className="bg-white shadow-lg rounded-lg overflow-hidden m-4 max-w-sm border border-gray-300 transition-transform transform hover:shadow-xl hover:scale-105 flex flex-col justify-between">
       <div>

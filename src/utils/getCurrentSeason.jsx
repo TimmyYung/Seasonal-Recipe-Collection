@@ -2,13 +2,13 @@ function getCurrentSeason() {
     const month = new Date().getMonth();
     
     if (month >= 2 && month <= 4) {
-      return 'spring';
+      return 'Spring';
     } else if (month >= 5 && month <= 7) {
-      return 'summer';
+      return 'Summer';
     } else if (month >= 8 && month <= 10) {
-      return 'autumn';
+      return 'Autumn';
     } else {
-      return 'winter';
+      return 'Winter';
     }
   }
   
