@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Search from './Search';
+import Header from './Header';
 import Recipes from './Recipes';
 import ObjectDetect from './ObjectDetect';
 import Timmy from './Timmy';
@@ -10,7 +10,7 @@ function App() {
 
   return (
     <div className="App">
-      <Search setText={setText} />
+      <Header setText={setText} />
       <Recipes location={location} />
       <ObjectDetect />
       <Timmy/>
