@@ -13,8 +13,8 @@ function Recipes({ recipes }) {
               key={key}
               label={recipe.label}
               image={recipe.image}
-              // url={recipe.uri}
-              url={fixedLink}
+              url={recipe.uri}
+              // url={fixedLink}
               ingredients={recipe.ingredients}
             />
           ))}
