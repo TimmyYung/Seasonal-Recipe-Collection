@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import RecipeCard from './components/RecipeCard';
-import { fixedLink } from './Timmy';
 
 function Recipes({ recipes }) {
   console.log({ recipes });
@@ -14,7 +13,6 @@ function Recipes({ recipes }) {
               label={recipe.label}
               image={recipe.image}
               url={recipe.uri}
-              // url={fixedLink}
               ingredients={recipe.ingredients}
             />
           ))}
