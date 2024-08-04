@@ -28,6 +28,9 @@ Header.propTypes = {
   };
   return (
     <header className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white p-8 rounded-b-lg shadow-xl mb-6">
+      <div className="absolute top-4 left-4 flex space-x-4">
+        <a href="/page2" className="text-white hover:underline">Computer Vision</a>
+      </div>
       <h1 className="text-4xl font-extrabold mb-6 text-center tracking-wide">
         🌟 Recipe Finder 🌟
       </h1>

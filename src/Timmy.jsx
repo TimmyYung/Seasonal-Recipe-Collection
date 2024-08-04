@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 
+export const fixedLink = 'https://www.foodnetwork.ca/recipe/cheese-manakish-middle-eastern-flatbread/';
+
+
 function App() {
   const [result, setResult] = useState(null);
   const [error, setError] = useState('');
-
-  const fixedLink = 'https://www.foodnetwork.ca/recipe/cheese-manakish-middle-eastern-flatbread/';
 
   const handleClick = async () => {
     try {
@@ -42,8 +43,7 @@ function App() {
 
   return (
     <div>
-      <h1>Process Recipe Link</h1>
-      <button onClick={handleClick}>Process Fixed Recipe Link</button>
+      <button onClick={handleClick}>Process Recipe POC</button>
       {error && <p style={{ color: 'red' }}>Error: {error}</p>}
       {result && (
         <div>

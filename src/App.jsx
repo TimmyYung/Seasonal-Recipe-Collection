@@ -11,7 +11,11 @@ function App() {
     <div className="App">
       <Header setRecipes={setAllRecipes} />
       <Recipes recipes={allRecipes} />
-      {/* <ObjectDetect /> */}
+      <br></br>
+      <br></br>
+      <ObjectDetect />
+      <br></br>
+      <br></br>
       <Timmy />
     </div>
   );
