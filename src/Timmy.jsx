@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function App() {
+export function App(toGo) {
   const [result, setResult] = useState(null);
   const [error, setError] = useState('');
 
@@ -13,7 +13,7 @@ function App() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ link: fixedLink }),
+        body: JSON.stringify({ link: toGo }),
       });
 
       const contentType = response.headers.get('content-type');
