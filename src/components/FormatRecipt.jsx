@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export const fixedLink = 'https://www.foodnetwork.ca/recipe/cheese-manakish-middle-eastern-flatbread/';
 

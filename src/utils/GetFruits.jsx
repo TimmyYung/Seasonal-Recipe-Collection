@@ -1,4 +1,4 @@
-import { stateCoordinates } from "./constants/states";
+import { stateCoordinates } from "../constants/states";
 
 const stateFruits = await fetch("/seasonal/US_Seasonal.json").then((data) =>
   data.json()

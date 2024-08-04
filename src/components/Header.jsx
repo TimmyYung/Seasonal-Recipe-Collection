@@ -1,8 +1,8 @@
-import { findNearestState } from "./GetFruits";
+import { findNearestState } from "../utils/GetFruits";
 import { useState } from 'react';
-import { getRecipes } from "./GetRecipes";
+import { getRecipes } from "../utils/GetRecipes";
 import PropTypes from 'prop-types';
-import getCurrentSeason from "./utils/getCurrentSeason";
+import getCurrentSeason from "../utils/getCurrentSeason";
 
 const Header = ({ setRecipes,  }) => {
 Header.propTypes = {
